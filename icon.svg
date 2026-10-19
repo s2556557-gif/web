@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="zenBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2C5F57" />
+      <stop offset="50%" stop-color="#234E48" />
+      <stop offset="100%" stop-color="#183833" />
+    </linearGradient>
+    <linearGradient id="terracottaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F28E6D" />
+      <stop offset="100%" stop-color="#E26D46" />
+    </linearGradient>
+    <linearGradient id="creamGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#FAF3E0" />
+    </linearGradient>
+    <filter id="zenShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0E2320" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- 主體背景 (圓角適配 PWA Maskable Icon 規範) -->
+  <rect width="512" height="512" rx="112" fill="url(#zenBgGrad)" />
+
+  <!-- 幾何身心平衡波浪背景環 -->
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#FAF3E0" stroke-opacity="0.08" stroke-width="4" stroke-dasharray="8 8" />
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#FAF3E0" stroke-opacity="0.12" stroke-width="2" />
+
+  <!-- 禪意蓮花與身心能量中心圖騰 -->
+  <g filter="url(#zenShadow)" transform="translate(256, 245)">
+    <!-- 底座花瓣 (Soft Sage) -->
+    <path d="M-90,30 C-60,70 60,70 90,30 C60,45 -60,45 -90,30 Z" fill="#6B8E85" opacity="0.85" />
+    
+    <!-- 左側平衡葉瓣 -->
+    <path d="M0,20 C-60,-20 -110,-40 -120,20 C-110,60 -50,60 0,20 Z" fill="url(#creamGrad)" opacity="0.9" />
+    
+    <!-- 右側平衡葉瓣 -->
+    <path d="M0,20 C60,-20 110,-40 120,20 C110,60 50,60 0,20 Z" fill="url(#creamGrad)" opacity="0.9" />
+
+    <!-- 中間主要蓮花瓣 (Cream) -->
+    <path d="M0,-110 C-50,-40 -60,20 0,40 C60,20 50,-40 0,-110 Z" fill="url(#creamGrad)" />
+    
+    <!-- 內核燃脂活力火焰水滴 (Terracotta Orange) -->
+    <path d="M0,-60 C-22,-10 -25,18 0,32 C25,18 22,-10 0,-60 Z" fill="url(#terracottaGrad)" />
+    
+    <!-- 頂端聚焦小圓點 -->
+    <circle cx="0" cy="-125" r="9" fill="#E26D46" />
+  </g>
+
+  <!-- 底部字體品牌標記 -->
+  <text x="256" y="420" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="28" font-weight="900" fill="#FAF3E0" letter-spacing="6" text-anchor="middle">MINDFIT ZEN</text>
+  <text x="256" y="445" font-family="'Noto Sans TC', system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#6B8E85" letter-spacing="3" text-anchor="middle">身心平衡 · 智能減脂</text>
+</svg>

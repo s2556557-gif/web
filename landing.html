@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>MindFit Zen - 身心平衡智能減脂系統 | Teal & Cream Zen 活動專題頁</title>
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- PWA 核心設定 -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#234E48">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MindFit Zen">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+  
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: var(--zen-cream);
+      overflow-y: auto !important;
+      margin: 0;
+      padding: 0;
+    }
+    .landing-full-page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px 60px 20px;
+    }
+    .landing-nav-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0 32px 0;
+    }
+    .landing-nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .landing-nav-links a {
+      text-decoration: none;
+      color: var(--zen-teal);
+      font-weight: 700;
+      font-size: 14px;
+      transition: var(--transition-smooth);
+    }
+    .landing-nav-links a:hover {
+      color: var(--zen-terracotta);
+    }
+    .btn-enter-app-glow {
+      padding: 12px 28px;
+      background: var(--zen-teal);
+      color: #fff;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(35, 78, 72, 0.3);
+      transition: var(--transition-smooth);
+    }
+    .btn-enter-app-glow:hover {
+      background: #1b3d38;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(35, 78, 72, 0.4);
+    }
+  </style>
+</head>
+<body class="zen-theme">
+
+  <div class="landing-full-page">
+    
+    <!-- 頂部品牌導航列 -->
+    <header class="landing-nav-top">
+      <div class="ld-logo">
+        <i class="fa-solid fa-spa"></i> <span>MindFit Zen</span>
+      </div>
+      <nav class="landing-nav-links">
+        <a href="index.html">今日總覽</a>
+        <a href="diet.html">飲食日記</a>
+        <a href="fasting.html">168 斷食</a>
+        <a href="workouts.html">燃脂運動</a>
+        <a href="trends.html">體重 & BMI</a>
+        <a href="profile.html">個人檔案</a>
+      </nav>
+      <a href="index.html" class="btn-enter-app-glow">
+        進入手機減脂軟件 <i class="fa-solid fa-circle-arrow-right"></i>
+      </a>
+    </header>
+
+    <!-- 落地頁 Hero 區塊 (完全依照設計稿 Teal & Cream 有機波浪架構) -->
+    <section class="ld-hero-section">
+      <div class="ld-hero-left">
+        <h1 class="ld-hero-title">STRONGER<br>BODY AND<br>MINDFULNESS.<br>MIND.</h1>
+        <p class="ld-hero-desc">
+          科學熱量赤字與身心覺察力量結合。助您在寧靜專注的節奏中，健康減脂、高效自噬，煥發輕盈自律的全新自我。
+        </p>
+        <div class="ld-hero-cta-row">
+          <a href="index.html" class="ld-btn-primary" style="text-decoration:none;">
+            立即體驗減肥軟件 <i class="fa-solid fa-circle-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ld-hero-right">
+        <img src="Mind-Body Fitness Coach Website – Teal & Cream Zen Layout.jpg" alt="Mind-Body Fitness Coach" class="ld-hero-img">
+      </div>
+    </section>
+
+    <!-- 落地頁 三大核心功能區塊 -->
+    <section class="ld-features-section" style="margin-top: 40px;">
+      <div class="ld-pill-badge">DITRA FULL & 100 · SCIENTIFIC DEFICIT</div>
+      <h2 class="ld-section-title">BALANCE FITNESS AND<br>MINDFULNESS TOGETHER</h2>
+
+      <div class="ld-cards-3col">
+        <div class="ld-card">
+          <div class="ld-icon-circle"><i class="fa-solid fa-seedling"></i></div>
+          <h3>身心覺察飲食庫</h3>
+          <p>精準紀錄三餐宏觀營養素，掌控每餐熱量赤字，打造無負擔的健康體質。</p>
+          <a href="diet.html" style="color:var(--zen-teal); font-weight:800; font-size:13px; text-decoration:none; margin-top:8px; display:inline-block;">查看飲食庫 <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="ld-card">
+          <div class="ld-icon-circle"><i class="fa-solid fa-hourglass-start"></i></div>
+          <h3>16:8 間歇性斷食</h3>
+          <p>精確掌握血糖平穩、糖原耗盡與自噬燃脂黃金窗口，加速體脂燃燒。</p>
+          <a href="fasting.html" style="color:var(--zen-teal); font-weight:800; font-size:13px; text-decoration:none; margin-top:8px; display:inline-block;">查看斷食鐘 <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="ld-card">
+          <div class="ld-icon-circle"><i class="fa-solid fa-fire-flame-curved"></i></div>
+          <h3>HIIT 語音節奏訓練</h3>
+          <p>高效間歇心率運動與語音倒數計時，全天持續啟動過量氧耗代謝。</p>
+          <a href="workouts.html" style="color:var(--zen-teal); font-weight:800; font-size:13px; text-decoration:none; margin-top:8px; display:inline-block;">查看運動庫 <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 落地頁 教練指導區塊 -->
+    <section class="ld-coach-section" style="margin-top: 40px;">
+      <div class="ld-coach-grid">
+        <div class="ld-coach-photo">
+          <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=600&auto=format&fit=crop&q=80" alt="專屬指導教練">
+        </div>
+        <div class="ld-coach-content">
+          <span class="ld-coach-tag">FOR YOUR BEST TRANSFORMATION</span>
+          <h2>CONTINUE THE<br>JOURNEY</h2>
+          <p>
+            每個人都擁有獨一無二的身心代謝節奏。MindFit Zen 透過精確 Mifflin-St Jeor 公式為您定制專屬 TDEE 赤字方案，讓減脂不再是忍耐，而是一場愉悅的身心修煉。
+          </p>
+          <a href="trends.html" class="ld-btn-primary" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+            計算我的 BMI 與身材指標 <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

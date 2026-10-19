@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>體重走勢與 BMI 智能精算 | MindFit Zen 智能減脂</title>
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- PWA 核心設定與行動裝置安裝優化 -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#234E48">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MindFit Zen">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="zen-theme">
+
+  <div class="desktop-stage">
+    <div class="phone-wrapper iphone15" id="phoneWrapper">
+      <div class="phone-frame">
+
+        <!-- 手機頂部狀態欄 -->
+        <header class="phone-status-bar">
+          <span class="status-time" id="statusClock">09:41</span>
+          <div class="status-icons">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <i class="fa-solid fa-battery-full"></i>
+          </div>
+        </header>
+
+        <main class="app-viewport" id="appViewport">
+          <section class="app-page active-page" id="page-trends">
+            
+            <div class="page-top-bar">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <a href="index.html" class="icon-round-btn" title="返回總覽" style="text-decoration:none;">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </a>
+                <div class="page-heading">
+                  <h2>體重與身材數據分析</h2>
+                  <span>科學記錄每一次蛻變</span>
+                </div>
+              </div>
+              <button class="pill-btn-outline" id="btnLogWeightNow">
+                <i class="fa-solid fa-plus"></i> 記錄體重
+              </button>
+            </div>
+
+            <!-- 當前體重核心卡片 -->
+            <div class="weight-hero-card zen-card">
+              <div class="whc-top">
+                <div class="whc-current">
+                  <span class="whc-label">當前體重</span>
+                  <div class="whc-val-row">
+                    <h1 id="currentWeightDisplay">58.4</h1>
+                    <span class="whc-unit">kg</span>
+                  </div>
+                  <span class="whc-tag-diff text-teal"><i class="fa-solid fa-arrow-trend-down"></i> 累計已減 -6.1 kg</span>
+                </div>
+                <div class="whc-target-box">
+                  <span class="whc-label">目標體重</span>
+                  <div class="whc-target-val">52.0 <small>kg</small></div>
+                  <span class="whc-remain">還差 6.4 kg 達標</span>
+                </div>
+              </div>
+
+              <!-- 目標進度條 -->
+              <div class="whc-progress-track">
+                <div class="whc-progress-fill" id="weightGoalFill" style="width: 48.8%;"></div>
+              </div>
+              <div class="whc-progress-labels">
+                <span>初始 64.5kg</span>
+                <span class="whc-progress-pct" id="weightGoalPct">已完成 48.8%</span>
+                <span>目標 52.0kg</span>
+              </div>
+            </div>
+
+            <!-- BMI 智能即時精算與身材評估模組 -->
+            <div class="bmi-interactive-card zen-card">
+              <div class="bic-header">
+                <div class="bic-title">
+                  <div class="bic-icon-wrap"><i class="fa-solid fa-calculator"></i></div>
+                  <div>
+                    <h3>BMI 智能健康體重精算器</h3>
+                    <span class="bic-subtitle">輸入身高體重 · 自動精算身體質量指數</span>
+                  </div>
+                </div>
+                <span class="bic-badge badge-normal" id="bmiStatusBadge">標準理想</span>
+              </div>
+
+              <div class="bic-inputs-row">
+                <div class="bic-input-group">
+                  <label><i class="fa-solid fa-ruler-vertical"></i> 身高 (cm)</label>
+                  <input type="number" id="bmiInputHeight" value="165" step="0.5" min="100" max="230">
+                </div>
+                <div class="bic-input-group">
+                  <label><i class="fa-solid fa-weight-scale"></i> 體重 (kg)</label>
+                  <input type="number" id="bmiInputWeight" value="58.4" step="0.1" min="30" max="250">
+                </div>
+              </div>
+
+              <!-- BMI 視覺色帶刻度指針 -->
+              <div class="bmi-gauge-wrap">
+                <div class="bmi-gauge-bar">
+                  <div class="bg-segment seg-under"><span>偏瘦 &lt;18.5</span></div>
+                  <div class="bg-segment seg-normal"><span>標準 18.5~23.9</span></div>
+                  <div class="bg-segment seg-over"><span>偏重 24~27.9</span></div>
+                  <div class="bg-segment seg-obese"><span>肥胖 ≥28</span></div>
+                </div>
+                <!-- 刻度指針 -->
+                <div class="bmi-needle" id="bmiNeedle" style="left: 36%;">
+                  <div class="needle-bubble" id="bmiLiveVal">21.4</div>
+                  <div class="needle-arrow"></div>
+                </div>
+              </div>
+
+              <div class="bic-footer">
+                <div class="bic-advice-text" id="bmiAdviceText">
+                  身高 <strong>165 cm</strong> 的標準健康體重為 <strong>50.4 ~ 65.1 kg</strong>，目前處於理想黃金區間！
+                </div>
+                <button class="bic-sync-btn" id="btnSyncBmiData">
+                  <i class="fa-solid fa-check-double"></i> 同步更新全站身材指標
+                </button>
+              </div>
+            </div>
+
+            <!-- 身體成分矩陣卡片 (BMI、體脂率、BMR、骨骼肌) -->
+            <div class="body-comp-grid">
+              <div class="comp-card zen-card">
+                <span class="comp-label">身體質量指數 BMI</span>
+                <h3 class="comp-val" id="valBMI">21.4</h3>
+                <span class="comp-status status-good">標準健康</span>
+              </div>
+              <div class="comp-card zen-card">
+                <span class="comp-label">預估體脂率</span>
+                <h3 class="comp-val" id="valBFP">23.2%</h3>
+                <span class="comp-status status-good">理想減脂</span>
+              </div>
+              <div class="comp-card zen-card">
+                <span class="comp-label">基礎代謝 BMR</span>
+                <h3 class="comp-val" id="valBMR">1,365</h3>
+                <span class="comp-status">kcal/天</span>
+              </div>
+              <div class="comp-card zen-card">
+                <span class="comp-label">骨骼肌率</span>
+                <h3 class="comp-val" id="valMuscle">28.5%</h3>
+                <span class="comp-status status-up"><i class="fa-solid fa-arrow-up"></i> 提升中</span>
+              </div>
+            </div>
+
+            <!-- 體重走勢動態 SVG 折線圖 -->
+            <div class="chart-card zen-card">
+              <div class="chart-header">
+                <div class="chart-title-wrap">
+                  <h3>體重走勢曲線</h3>
+                  <span class="chart-sub">穩定下降中 · 趨勢良好</span>
+                </div>
+                <div class="chart-range-selector">
+                  <button class="c-range-btn active" data-range="7">7天</button>
+                  <button class="c-range-btn" data-range="30">30天</button>
+                  <button class="c-range-btn" data-range="all">全部</button>
+                </div>
+              </div>
+
+              <!-- SVG 折線圖表容器 -->
+              <div class="chart-svg-container" id="weightChartBox"></div>
+
+              <!-- 圖表底部輔助指標 -->
+              <div class="chart-footer-metrics">
+                <div class="cfm-item">
+                  <span>週均體重</span>
+                  <strong>58.8 kg</strong>
+                </div>
+                <div class="cfm-item">
+                  <span>本週減重</span>
+                  <strong class="text-teal">-0.8 kg</strong>
+                </div>
+                <div class="cfm-item">
+                  <span>預計達標</span>
+                  <strong>6 週後</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- 歷史測量清單 -->
+            <div class="section-card-box">
+              <div class="section-header">
+                <h3 class="section-title">體重記錄歷史</h3>
+                <button class="text-action-btn" id="btnClearHistoryConfirm">清空重置</button>
+              </div>
+              <div class="weight-history-list" id="weightHistoryContainer"></div>
+            </div>
+
+            <div class="viewport-bottom-spacer"></div>
+          </section>
+        </main>
+
+        <!-- 底部現代導航欄 (Active: 趨勢) -->
+        <nav class="bottom-nav-bar" id="bottomNavBar">
+          <a href="index.html" class="nav-tab" data-target="page-dashboard">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-house"></i></div>
+            <span class="nav-text">今日</span>
+          </a>
+          <a href="diet.html" class="nav-tab" data-target="page-diet">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-utensils"></i></div>
+            <span class="nav-text">飲食</span>
+          </a>
+          <a href="fasting.html" class="nav-tab" data-target="page-fasting">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-hourglass-half"></i></div>
+            <span class="nav-text">斷食</span>
+          </a>
+          <a href="workouts.html" class="nav-tab" data-target="page-workout">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-dumbbell"></i></div>
+            <span class="nav-text">運動</span>
+          </a>
+          <a href="trends.html" class="nav-tab active" data-target="page-trends">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
+            <span class="nav-text">趨勢</span>
+          </a>
+          <a href="profile.html" class="nav-tab" data-target="page-profile">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-user"></i></div>
+            <span class="nav-text">我的</span>
+          </a>
+        </nav>
+
+        <div class="home-indicator"></div>
+
+      </div><!-- /.phone-frame -->
+    </div><!-- /.phone-wrapper -->
+  </div><!-- /.desktop-stage -->
+
+  <!-- 體重記錄滑尺彈窗 (Weight Logger Modal) -->
+  <div class="modal-overlay" id="weightModalOverlay">
+    <div class="bottom-sheet zen-sheet">
+      <div class="sheet-drag-handle"></div>
+      <div class="sheet-header">
+        <div class="sheet-title-box">
+          <h3>記錄今日體重</h3>
+          <span class="sheet-subtitle">建議早晨空腹排便後測量更精準</span>
+        </div>
+        <button class="close-sheet-btn" id="btnCloseWeightModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="weight-picker-body">
+        <div class="weight-display-huge">
+          <span id="pickerWeightVal">58.4</span> <small>kg</small>
+        </div>
+        <p class="weight-diff-tip" id="pickerDiffTip">相較上次記錄 <strong>-0.2 kg</strong>，繼續保持！</p>
+
+        <!-- 滑動刻度條 -->
+        <div class="ruler-container">
+          <input type="range" id="weightRulerInput" min="40.0" max="120.0" step="0.1" value="58.4">
+          <div class="ruler-ticks">
+            <span>45</span><span>50</span><span>55</span><span>60</span><span>65</span><span>70</span><span>75</span>
+          </div>
+        </div>
+
+        <!-- 附加體態備註 -->
+        <div class="form-row-input">
+          <input type="text" id="weightNoteInput" placeholder="添加備註（如：今日空腹、月經期、大餐後）">
+        </div>
+
+        <button class="btn-primary-action" id="btnSaveWeightEntry">
+          <i class="fa-solid fa-floppy-disk"></i> 保存體重記錄
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全局輕量 Toast 提示框 -->
+  <div class="toast-notification" id="globalToast">
+    <div class="toast-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <span class="toast-message" id="toastMessage">已成功記錄！</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

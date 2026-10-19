@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>個人健康中心 · 自訂檔案與 TDEE | MindFit Zen 智能減脂</title>
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- PWA 核心設定與行動裝置安裝優化 -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#234E48">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MindFit Zen">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="zen-theme">
+
+  <div class="desktop-stage">
+    <div class="phone-wrapper iphone15" id="phoneWrapper">
+      <div class="phone-frame">
+
+        <!-- 手機頂部狀態欄 -->
+        <header class="phone-status-bar">
+          <span class="status-time" id="statusClock">09:41</span>
+          <div class="status-icons">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <i class="fa-solid fa-battery-full"></i>
+          </div>
+        </header>
+
+        <main class="app-viewport" id="appViewport">
+          <section class="app-page active-page" id="page-profile">
+            
+            <div class="page-top-bar" style="margin-bottom:12px;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <a href="index.html" class="icon-round-btn" title="返回總覽" style="text-decoration:none;">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </a>
+                <div class="page-heading">
+                  <h2>個人健康中心</h2>
+                  <span>身心平衡 · 自律蛻變</span>
+                </div>
+              </div>
+              <button class="pill-btn-outline" id="btnOpenShareCard">
+                <i class="fa-solid fa-share-nodes"></i> 打卡海報
+              </button>
+            </div>
+
+            <!-- 用戶個人資料頂部卡片 -->
+            <div class="profile-user-card zen-card">
+              <div class="p-card-top">
+                <div class="p-avatar-wrap" id="btnOpenEditAvatar" title="點擊更換頭像">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&auto=format&fit=crop&q=80" alt="頭像" class="p-avatar" id="profileUserAvatar">
+                  <span class="p-badge-edit"><i class="fa-solid fa-camera"></i></span>
+                </div>
+                <div class="p-info">
+                  <div class="p-name-row">
+                    <h2 id="profileUserName">林曉晴</h2>
+                    <button class="edit-name-btn" id="btnOpenEditProfileModal" title="編輯個人暱稱與頭像">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <span class="vip-tag"><i class="fa-solid fa-crown"></i> 專業會員</span>
+                  </div>
+                  <p class="p-motto" id="profileUserMotto">「做自己的身材雕刻家，自律即自由」</p>
+                  <div class="p-tags-row">
+                    <span class="tag-chip">減脂塑形</span>
+                    <span class="tag-chip">168 斷食者</span>
+                    <span class="tag-chip">高蛋白飲食</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="profile-stats-bar">
+                <div class="p-stat-box">
+                  <span class="ps-val">12</span>
+                  <span class="ps-lbl">堅持天數</span>
+                </div>
+                <div class="p-stat-box">
+                  <span class="ps-val text-teal">6.1</span>
+                  <span class="ps-lbl">減掉公斤</span>
+                </div>
+                <div class="p-stat-box">
+                  <span class="ps-val text-terracotta">42</span>
+                  <span class="ps-lbl">完成運動</span>
+                </div>
+                <div class="p-stat-box">
+                  <span class="ps-val">8</span>
+                  <span class="ps-lbl">解鎖成就</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 我的減重科學定制方案 (TDEE 與赤字設定) -->
+            <div class="settings-group-card zen-card">
+              <div class="card-inner-header">
+                <div>
+                  <h3>科學減重方案設置</h3>
+                  <p class="card-sub-p">基於 Mifflin-St Jeor 公式精算</p>
+                </div>
+                <button class="pill-btn-outline" id="btnRecalculatePlan">
+                  <i class="fa-solid fa-sliders"></i> 重新計算
+                </button>
+              </div>
+
+              <div class="plan-params-list">
+                <div class="param-row">
+                  <span class="param-key">身高 / 體重 / 年齡</span>
+                  <span class="param-val" id="profileBioInfo">165 cm · 58.4 kg · 26歲 (女)</span>
+                </div>
+                <div class="param-row">
+                  <span class="param-key">每日總消耗 (TDEE)</span>
+                  <span class="param-val" id="profileTDEE">2,150 kcal/天</span>
+                </div>
+                <div class="param-row">
+                  <span class="param-key">每日設定熱量赤字</span>
+                  <span class="param-val text-terracotta">-350 kcal/天 (安全溫和)</span>
+                </div>
+                <div class="param-row">
+                  <span class="param-key">建議每日攝入總熱量</span>
+                  <span class="param-val text-teal font-bold" id="profileRecIntake">1,800 kcal</span>
+                </div>
+                <div class="param-row">
+                  <span class="param-key">目標達成倒計時</span>
+                  <span class="param-val">預計於 <strong>2026/11/30</strong> 達成 52kg</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 成就徽章榮譽牆 -->
+            <div class="settings-group-card zen-card">
+              <div class="card-inner-header">
+                <h3>減脂榮譽勳章</h3>
+                <span class="badge-accent">8 / 12 已點亮</span>
+              </div>
+
+              <div class="badges-scroll-grid">
+                <div class="badge-item unlocked">
+                  <div class="badge-hex bg-teal"><i class="fa-solid fa-seedling"></i></div>
+                  <span>初心啟程</span>
+                </div>
+                <div class="badge-item unlocked">
+                  <div class="badge-hex bg-terracotta"><i class="fa-solid fa-fire"></i></div>
+                  <span>燃脂先鋒</span>
+                </div>
+                <div class="badge-item unlocked">
+                  <div class="badge-hex bg-blue"><i class="fa-solid fa-droplet"></i></div>
+                  <span>補水達人</span>
+                </div>
+                <div class="badge-item unlocked">
+                  <div class="badge-hex bg-sage"><i class="fa-solid fa-hourglass-start"></i></div>
+                  <span>斷食大師</span>
+                </div>
+                <div class="badge-item unlocked">
+                  <div class="badge-hex bg-gold"><i class="fa-solid fa-trophy"></i></div>
+                  <span>減重 5KG</span>
+                </div>
+                <div class="badge-item locked">
+                  <div class="badge-hex"><i class="fa-solid fa-medal"></i></div>
+                  <span>百天自律</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 系統功能與自訂偏好 -->
+            <div class="settings-menu-list zen-card">
+              <div class="menu-item-row" id="rowSoundToggle">
+                <div class="menu-icon"><i class="fa-solid fa-volume-high"></i></div>
+                <div class="menu-label">
+                  <h4>操作音效反饋</h4>
+                  <p>打卡與按鈕原生觸感提示音</p>
+                </div>
+                <label class="switch-toggle">
+                  <input type="checkbox" id="soundSwitch" checked>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+
+              <div class="menu-item-row" id="rowInstallAppAction" style="cursor:pointer;">
+                <div class="menu-icon" style="color:var(--zen-terracotta); background:var(--zen-terracotta-bg);"><i class="fa-solid fa-download"></i></div>
+                <div class="menu-label">
+                  <h4>安裝至手機主畫面 (PWA)</h4>
+                  <p>建立桌面捷徑，全螢幕秒開體驗</p>
+                </div>
+                <i class="fa-solid fa-chevron-right menu-arrow"></i>
+              </div>
+
+              <div class="menu-item-row" id="rowExportData">
+                <div class="menu-icon"><i class="fa-solid fa-file-arrow-down"></i></div>
+                <div class="menu-label">
+                  <h4>匯出我的健康數據 (JSON)</h4>
+                  <p>本地備份體重與飲食記錄</p>
+                </div>
+                <i class="fa-solid fa-chevron-right menu-arrow"></i>
+              </div>
+
+              <div class="menu-item-row text-danger" id="rowResetAllData">
+                <div class="menu-icon icon-danger"><i class="fa-solid fa-trash-can"></i></div>
+                <div class="menu-label">
+                  <h4 class="text-danger">清除所有自訂數據</h4>
+                  <p>還原為系統初始預設狀態</p>
+                </div>
+                <i class="fa-solid fa-chevron-right menu-arrow"></i>
+              </div>
+            </div>
+
+            <div class="viewport-bottom-spacer"></div>
+          </section>
+        </main>
+
+        <!-- 底部現代導航欄 (Active: 我的) -->
+        <nav class="bottom-nav-bar" id="bottomNavBar">
+          <a href="index.html" class="nav-tab" data-target="page-dashboard">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-house"></i></div>
+            <span class="nav-text">今日</span>
+          </a>
+          <a href="diet.html" class="nav-tab" data-target="page-diet">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-utensils"></i></div>
+            <span class="nav-text">飲食</span>
+          </a>
+          <a href="fasting.html" class="nav-tab" data-target="page-fasting">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-hourglass-half"></i></div>
+            <span class="nav-text">斷食</span>
+          </a>
+          <a href="workouts.html" class="nav-tab" data-target="page-workout">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-dumbbell"></i></div>
+            <span class="nav-text">運動</span>
+          </a>
+          <a href="trends.html" class="nav-tab" data-target="page-trends">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
+            <span class="nav-text">趨勢</span>
+          </a>
+          <a href="profile.html" class="nav-tab active" data-target="page-profile">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-user"></i></div>
+            <span class="nav-text">我的</span>
+          </a>
+        </nav>
+
+        <div class="home-indicator"></div>
+
+      </div><!-- /.phone-frame -->
+    </div><!-- /.phone-wrapper -->
+  </div><!-- /.desktop-stage -->
+
+  <!-- 成果打卡海報生成彈窗 (Share Poster Modal) -->
+  <div class="modal-overlay" id="sharePosterModal">
+    <div class="poster-modal-content">
+      <button class="poster-close-btn" id="btnClosePosterModal"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="share-poster-card" id="printablePoster">
+        <div class="poster-card-header">
+          <div class="poster-brand">
+            <i class="fa-solid fa-spa"></i>
+            <span>MindFit Zen 減脂日記</span>
+          </div>
+          <span class="poster-date" id="posterDate">2026.10.19</span>
+        </div>
+
+        <div class="poster-user-strip">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80" alt="用戶" class="poster-avatar" id="posterUserAvatar">
+          <div class="poster-u-info">
+            <h4 id="posterUserName">林曉晴</h4>
+            <p>已堅持身心減脂打卡 <strong>12 天</strong></p>
+          </div>
+          <div class="poster-badge-right">
+            <span>累計減重</span>
+            <strong>-6.1 kg</strong>
+          </div>
+        </div>
+
+        <div class="poster-metrics-grid">
+          <div class="pm-box">
+            <span class="pm-num text-cream" id="posterIntake">1,120</span>
+            <span class="pm-lbl">攝入 (kcal)</span>
+          </div>
+          <div class="pm-box">
+            <span class="pm-num text-terracotta" id="posterBurn">340</span>
+            <span class="pm-lbl">消耗 (kcal)</span>
+          </div>
+          <div class="pm-box">
+            <span class="pm-num text-blue" id="posterWater">1,500</span>
+            <span class="pm-lbl">飲水 (ml)</span>
+          </div>
+        </div>
+
+        <div class="poster-quote-box">
+          <p>「生活沒有奇蹟，只有在平靜與自律中遇見更好的自己。」</p>
+        </div>
+
+        <div class="poster-qr-footer">
+          <div class="qr-dummy">
+            <i class="fa-solid fa-qrcode"></i>
+          </div>
+          <div class="qr-text">
+            <strong>MindFit 智能減脂挑戰</strong>
+            <span>掃碼加入我的健康蛻變計畫</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="poster-actions-row">
+        <button class="btn-primary-action" id="btnDownloadPoster">
+          <i class="fa-solid fa-download"></i> 保存海報圖片
+        </button>
+        <button class="btn-secondary-action" id="btnCopyPosterLink">
+          <i class="fa-solid fa-link"></i> 複製分享連結
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TDEE 目標設定與重算彈窗 (TDEE Calculator Modal) -->
+  <div class="modal-overlay" id="tdeeModalOverlay">
+    <div class="bottom-sheet zen-sheet">
+      <div class="sheet-drag-handle"></div>
+      <div class="sheet-header">
+        <div class="sheet-title-box">
+          <h3>個人化 TDEE 減重方案定制</h3>
+          <span class="sheet-subtitle">根據生理指標科學計算每日最佳熱量赤字</span>
+        </div>
+        <button class="close-sheet-btn" id="btnCloseTdeeModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="tdee-form-body">
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>生理性別</label>
+            <select id="calcGender">
+              <option value="female" selected>女性 (Female)</option>
+              <option value="male">男性 (Male)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>年齡 (歲)</label>
+            <input type="number" id="calcAge" value="26" min="14" max="90">
+          </div>
+          <div class="form-group">
+            <label>身高 (cm)</label>
+            <input type="number" id="calcHeight" value="165" min="120" max="220">
+          </div>
+          <div class="form-group">
+            <label>當前體重 (kg)</label>
+            <input type="number" id="calcWeight" value="58.4" step="0.1" min="30" max="200">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>目標體重 (kg)</label>
+          <input type="number" id="calcTargetWeight" value="52.0" step="0.1" min="30" max="200">
+        </div>
+
+        <div class="form-group">
+          <label>日常活動強度水平</label>
+          <select id="calcActivity">
+            <option value="1.2">久坐少動（學生/辦公室白領，幾乎無運動）</option>
+            <option value="1.375" selected>輕度活躍（每週運動 1~3 天）</option>
+            <option value="1.55">中度活躍（每週規律運動 3~5 天）</option>
+            <option value="1.725">高強度活躍（每週運動 6~7 天 / 體力工作）</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>減脂節奏設定</label>
+          <select id="calcDeficit">
+            <option value="300">溫和健康減脂 (-300 kcal/天，約每週 -0.3kg)</option>
+            <option value="500" selected>標準高效減脂 (-500 kcal/天，約每週 -0.5kg)</option>
+            <option value="700">衝刺減脂 (-700 kcal/天，適合大基數)</option>
+          </select>
+        </div>
+
+        <button class="btn-primary-action" id="btnSaveTdeePlan">
+          <i class="fa-solid fa-calculator"></i> 計算並更新減脂計畫
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 自訂個人資料 (姓名與頭像) 模態框 (Edit Profile Modal) -->
+  <div class="modal-overlay" id="editProfileModalOverlay">
+    <div class="bottom-sheet zen-sheet">
+      <div class="sheet-drag-handle"></div>
+      <div class="sheet-header">
+        <div class="sheet-title-box">
+          <h3>自訂個人資料</h3>
+          <span class="sheet-subtitle">隨時修改您的頭像、暱稱與減脂宣言</span>
+        </div>
+        <button class="close-sheet-btn" id="btnCloseEditProfileModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="edit-profile-body">
+        <div class="avatar-custom-section">
+          <div class="avatar-preview-wrap">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&auto=format&fit=crop&q=80" alt="頭像預覽" id="editAvatarPreviewImg" class="edit-avatar-preview">
+            <button class="avatar-upload-trigger" id="btnTriggerAvatarUpload" title="點擊上傳本機相片">
+              <i class="fa-solid fa-camera"></i>
+            </button>
+          </div>
+          <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+          <div class="avatar-upload-tip">點擊相機圖標選擇本機照片，或於下方直接挑選預設風格頭像</div>
+        </div>
+
+        <div class="preset-avatars-box">
+          <span class="preset-label">推薦風格頭像（點擊即選）：</span>
+          <div class="preset-avatar-grid">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80" class="preset-avatar-item active" data-src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80" alt="氣質瑜伽女生">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" class="preset-avatar-item" data-src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="陽光運動女孩">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80" class="preset-avatar-item" data-src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80" alt="自然微笑">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" class="preset-avatar-item" data-src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="陽光男生">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80" class="preset-avatar-item" data-src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80" alt="自律型男">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80" class="preset-avatar-item" data-src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80" alt="極簡頭像">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>或自訂網路圖片 URL</label>
+          <input type="text" id="avatarUrlInput" placeholder="https://example.com/photo.jpg">
+        </div>
+
+        <div class="form-group">
+          <label>姓名 / 暱稱 (Name)</label>
+          <input type="text" id="editUserNameInput" value="林曉晴" placeholder="請輸入姓名" maxlength="20">
+        </div>
+
+        <div class="form-group">
+          <label>減脂座右銘 / 宣告 (Motto)</label>
+          <input type="text" id="editUserMottoInput" value="做自己的身材雕刻家，自律即自由" placeholder="寫一句激勵自己的金句" maxlength="50">
+        </div>
+
+        <button class="btn-primary-action" id="btnSaveProfileCustom">
+          <i class="fa-solid fa-floppy-disk"></i> 儲存自訂個人資料
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全局輕量 Toast 提示框 -->
+  <div class="toast-notification" id="globalToast">
+    <div class="toast-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <span class="toast-message" id="toastMessage">已成功記錄！</span>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // 在個人中心綁定直接點選 PWA 安裝按鈕
+    const rowInstall = document.getElementById('rowInstallAppAction');
+    if (rowInstall) {
+      rowInstall.addEventListener('click', () => {
+        const btn = document.getElementById('btnInstallPWA');
+        if (btn) btn.click();
+        else alert('📱 提示：在 Safari 點擊「分享 ➔ 加入主畫面」，或在 Chrome/Edge 點擊「安裝應用程式」！');
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{
+  "name": "MindFit Zen - 智能身心減脂助手",
+  "short_name": "MindFit Zen",
+  "description": "結合 16:8 輕斷食、熱量赤字管理、科學 BMI 精算與身心平衡的旗艦減脂軟件",
+  "start_url": "./index.html",
+  "id": "mindfit-zen-app",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#FAF3E0",
+  "theme_color": "#234E48",
+  "categories": ["health", "fitness", "lifestyle"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "記錄飲食",
+      "short_name": "飲食日記",
+      "description": "快速記錄今日餐飲卡路里與宏量營養素",
+      "url": "./diet.html",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "16:8 斷食鐘",
+      "short_name": "輕斷食",
+      "description": "查看目前自噬燃脂進度與倒數計時",
+      "url": "./fasting.html",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "燃脂訓練庫",
+      "short_name": "運動計時",
+      "description": "啟動全屏沉浸式 HIIT 訓練計時器",
+      "url": "./workouts.html",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "體重與 BMI",
+      "short_name": "BMI 精算",
+      "description": "輸入身高體重自動計算 BMI 與查看趨勢圖表",
+      "url": "./trends.html",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "個人檔案",
+      "short_name": "我的中心",
+      "description": "修改頭像、暱稱與計算 TDEE",
+      "url": "./profile.html",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    }
+  ]
+}

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>飲食日記 · 熱量與營養素庫 | MindFit Zen 智能減脂</title>
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- PWA 核心設定與行動裝置安裝優化 -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#234E48">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MindFit Zen">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="zen-theme">
+
+  <div class="desktop-stage">
+    <div class="phone-wrapper iphone15" id="phoneWrapper">
+      <div class="phone-frame">
+
+        <!-- 手機頂部狀態欄與返回導航 -->
+        <header class="phone-status-bar">
+          <span class="status-time" id="statusClock">09:41</span>
+          <div class="status-icons">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <i class="fa-solid fa-battery-full"></i>
+          </div>
+        </header>
+
+        <main class="app-viewport" id="appViewport">
+          <section class="app-page active-page" id="page-diet">
+            
+            <div class="page-top-bar">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <a href="index.html" class="icon-round-btn" title="返回總覽" style="text-decoration:none;">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </a>
+                <div class="page-heading">
+                  <h2>飲食與熱量日記</h2>
+                  <span>精準記錄每一口能量與營養素</span>
+                </div>
+              </div>
+              <button class="pill-btn-outline open-food-modal" data-meal="lunch">
+                <i class="fa-solid fa-plus"></i> 記錄餐食
+              </button>
+            </div>
+
+            <!-- 日期選擇滑動列 -->
+            <div class="date-strip-wrapper zen-card">
+              <button class="date-arrow-btn" id="prevDayBtn"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="current-date-badge">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span id="currentDateLabel">今天 · 10月19日 星期一</span>
+              </div>
+              <button class="date-arrow-btn" id="nextDayBtn"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+            <!-- 飲食營養儀表盤 -->
+            <div class="diet-summary-card zen-card">
+              <div class="diet-summary-row">
+                <div class="diet-sum-col">
+                  <span class="sum-label">已攝入</span>
+                  <span class="sum-value text-terracotta" id="dietTotalIntake">1,120</span>
+                  <span class="sum-unit">kcal</span>
+                </div>
+                <div class="diet-sum-divider"></div>
+                <div class="diet-sum-col">
+                  <span class="sum-label">推薦剩餘</span>
+                  <span class="sum-value text-teal" id="dietRemainKcal">680</span>
+                  <span class="sum-unit">kcal</span>
+                </div>
+                <div class="diet-sum-divider"></div>
+                <div class="diet-sum-col">
+                  <span class="sum-label">健康評級</span>
+                  <span class="sum-badge-grade">A+ 優良</span>
+                </div>
+              </div>
+              <!-- 宏觀營養條 -->
+              <div class="diet-ratio-bar">
+                <div class="ratio-segment ratio-carbs" style="width: 45%;" title="碳水 45%"></div>
+                <div class="ratio-segment ratio-protein" style="width: 32%;" title="蛋白質 32%"></div>
+                <div class="ratio-segment ratio-fat" style="width: 23%;" title="脂肪 23%"></div>
+              </div>
+              <div class="diet-ratio-legend">
+                <span><span class="dot-c"></span> 碳水 45%</span>
+                <span><span class="dot-p"></span> 蛋白質 32%</span>
+                <span><span class="dot-f"></span> 脂肪 23%</span>
+              </div>
+            </div>
+
+            <!-- 四餐分組詳細列表 -->
+            <div class="meals-accordion">
+              <!-- 早餐區塊 -->
+              <div class="meal-block zen-card">
+                <div class="meal-block-header">
+                  <div class="meal-block-title">
+                    <span class="m-icon bf"><i class="fa-solid fa-sun"></i></span>
+                    <div>
+                      <h3>早晨輕食 (早餐)</h3>
+                      <span class="m-rec">建議 400~500 kcal</span>
+                    </div>
+                  </div>
+                  <div class="meal-block-meta">
+                    <span class="m-subtotal" id="bfSubtotal">340 kcal</span>
+                    <button class="m-add-btn open-food-modal" data-meal="breakfast"><i class="fa-solid fa-plus"></i> 記錄</button>
+                  </div>
+                </div>
+                <div class="food-item-list" id="bfFoodList"></div>
+              </div>
+
+              <!-- 午餐區塊 -->
+              <div class="meal-block zen-card">
+                <div class="meal-block-header">
+                  <div class="meal-block-title">
+                    <span class="m-icon lc"><i class="fa-solid fa-utensils"></i></span>
+                    <div>
+                      <h3>能量午餐</h3>
+                      <span class="m-rec">建議 600~700 kcal</span>
+                    </div>
+                  </div>
+                  <div class="meal-block-meta">
+                    <span class="m-subtotal" id="lcSubtotal">490 kcal</span>
+                    <button class="m-add-btn open-food-modal" data-meal="lunch"><i class="fa-solid fa-plus"></i> 記錄</button>
+                  </div>
+                </div>
+                <div class="food-item-list" id="lcFoodList"></div>
+              </div>
+
+              <!-- 晚餐區塊 -->
+              <div class="meal-block zen-card">
+                <div class="meal-block-header">
+                  <div class="meal-block-title">
+                    <span class="m-icon dn"><i class="fa-solid fa-moon"></i></span>
+                    <div>
+                      <h3>飽腹低卡晚餐</h3>
+                      <span class="m-rec">建議 400~500 kcal</span>
+                    </div>
+                  </div>
+                  <div class="meal-block-meta">
+                    <span class="m-subtotal" id="dnSubtotal">290 kcal</span>
+                    <button class="m-add-btn open-food-modal" data-meal="dinner"><i class="fa-solid fa-plus"></i> 記錄</button>
+                  </div>
+                </div>
+                <div class="food-item-list" id="dnFoodList"></div>
+              </div>
+
+              <!-- 加餐點心區塊 -->
+              <div class="meal-block zen-card">
+                <div class="meal-block-header">
+                  <div class="meal-block-title">
+                    <span class="m-icon sn"><i class="fa-solid fa-apple-whole"></i></span>
+                    <div>
+                      <h3>加餐與健康零食</h3>
+                      <span class="m-rec">建議 ≤ 200 kcal</span>
+                    </div>
+                  </div>
+                  <div class="meal-block-meta">
+                    <span class="m-subtotal" id="snSubtotal">0 kcal</span>
+                    <button class="m-add-btn open-food-modal" data-meal="snack"><i class="fa-solid fa-plus"></i> 記錄</button>
+                  </div>
+                </div>
+                <div class="food-item-list" id="snFoodList">
+                  <div class="empty-food-tip">今日尚未添加加餐小點心</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="viewport-bottom-spacer"></div>
+          </section>
+        </main>
+
+        <!-- 底部現代導航欄 (Active: 飲食) -->
+        <nav class="bottom-nav-bar" id="bottomNavBar">
+          <a href="index.html" class="nav-tab" data-target="page-dashboard">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-house"></i></div>
+            <span class="nav-text">今日</span>
+          </a>
+          <a href="diet.html" class="nav-tab active" data-target="page-diet">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-utensils"></i></div>
+            <span class="nav-text">飲食</span>
+          </a>
+          <a href="fasting.html" class="nav-tab" data-target="page-fasting">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-hourglass-half"></i></div>
+            <span class="nav-text">斷食</span>
+          </a>
+          <a href="workouts.html" class="nav-tab" data-target="page-workout">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-dumbbell"></i></div>
+            <span class="nav-text">運動</span>
+          </a>
+          <a href="trends.html" class="nav-tab" data-target="page-trends">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
+            <span class="nav-text">趨勢</span>
+          </a>
+          <a href="profile.html" class="nav-tab" data-target="page-profile">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-user"></i></div>
+            <span class="nav-text">我的</span>
+          </a>
+        </nav>
+
+        <div class="home-indicator"></div>
+
+      </div><!-- /.phone-frame -->
+    </div><!-- /.phone-wrapper -->
+  </div><!-- /.desktop-stage -->
+
+  <!-- 食物熱量查詢與添加模態框 -->
+  <div class="modal-overlay" id="foodModalOverlay">
+    <div class="bottom-sheet zen-sheet">
+      <div class="sheet-drag-handle"></div>
+      <div class="sheet-header">
+        <div class="sheet-title-box">
+          <h3 id="currentMealModalTitle">記錄午餐飲食</h3>
+          <span class="sheet-subtitle">選擇食材並滑動設定公克數 (g)</span>
+        </div>
+        <button class="close-sheet-btn" id="btnCloseFoodModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="food-search-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="foodSearchInput" placeholder="搜尋食物名稱，如：雞胸肉、紫米飯、燕麥...">
+        <button class="clear-search-btn" id="btnClearSearch"><i class="fa-solid fa-circle-xmark"></i></button>
+      </div>
+
+      <div class="food-cat-strip">
+        <button class="f-cat-btn active" data-cat="all">全部</button>
+        <button class="f-cat-btn" data-cat="protein">高蛋白肉蛋</button>
+        <button class="f-cat-btn" data-cat="staple">優質主食低GI</button>
+        <button class="f-cat-btn" data-cat="vege">蔬菜菌菇</button>
+        <button class="f-cat-btn" data-cat="fruit">水果堅果</button>
+        <button class="f-cat-btn" data-cat="drink">飲品乳品</button>
+      </div>
+
+      <div class="food-search-results" id="foodResultsList"></div>
+
+      <div class="portion-adjust-panel" id="portionPanel" style="display: none;">
+        <div class="portion-food-info">
+          <strong id="portionFoodName">香煎雞胸肉</strong>
+          <span id="portionPer100g">每 100g 含 133 kcal · 蛋白質 28g</span>
+        </div>
+        <div class="portion-slider-row">
+          <span>份量：<strong id="portionValDisplay">150</strong> 克 (g)</span>
+          <input type="range" id="portionSlider" min="20" max="500" step="10" value="150">
+        </div>
+        <div class="portion-total-preview">
+          <span>計算熱量：<strong class="text-terracotta" id="portionKcalPreview">200 kcal</strong></span>
+          <button class="btn-confirm-add" id="btnConfirmAddFood">
+            <i class="fa-solid fa-check"></i> 確認記錄
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全局輕量 Toast 提示框 -->
+  <div class="toast-notification" id="globalToast">
+    <div class="toast-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <span class="toast-message" id="toastMessage">已成功記錄！</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

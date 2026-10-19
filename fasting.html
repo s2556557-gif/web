@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>間歇性輕斷食 · 16:8 燃脂計時鐘 | MindFit Zen 智能減脂</title>
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- PWA 核心設定與行動裝置安裝優化 -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#234E48">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MindFit Zen">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="zen-theme">
+
+  <div class="desktop-stage">
+    <div class="phone-wrapper iphone15" id="phoneWrapper">
+      <div class="phone-frame">
+
+        <!-- 手機頂部狀態欄 -->
+        <header class="phone-status-bar">
+          <span class="status-time" id="statusClock">09:41</span>
+          <div class="status-icons">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <i class="fa-solid fa-battery-full"></i>
+          </div>
+        </header>
+
+        <main class="app-viewport" id="appViewport">
+          <section class="app-page active-page" id="page-fasting">
+            
+            <div class="page-top-bar">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <a href="index.html" class="icon-round-btn" title="返回總覽" style="text-decoration:none;">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </a>
+                <div class="page-heading">
+                  <h2>間歇性輕斷食</h2>
+                  <span>加速自噬反應 · 強效燃燒深層體脂</span>
+                </div>
+              </div>
+              <button class="icon-round-btn" id="btnFastingHelp">
+                <i class="fa-regular fa-circle-question"></i>
+              </button>
+            </div>
+
+            <!-- 斷食方案切換選單 -->
+            <div class="plan-tabs-row">
+              <button class="plan-tab active" data-fast-plan="16-8">16:8 (經典模式)</button>
+              <button class="plan-tab" data-fast-plan="18-6">18:6 (燃脂進階)</button>
+              <button class="plan-tab" data-fast-plan="14-10">14:10 (溫和適應)</button>
+              <button class="plan-tab" data-fast-plan="20-4">20:4 (生酮戰士)</button>
+            </div>
+
+            <!-- 巨大的燃脂動態指針圓環 -->
+            <div class="fasting-hero-box zen-card">
+              <div class="fasting-svg-wrap">
+                <svg class="fasting-svg" width="240" height="240" viewBox="0 0 240 240">
+                  <circle class="f-ring-bg" stroke="rgba(35, 78, 72, 0.15)" stroke-width="16" fill="transparent" r="100" cx="120" cy="120"/>
+                  <circle class="f-ring-bar" id="fastingRingBar" stroke="url(#terracottaGradient)" stroke-width="16" stroke-linecap="round" fill="transparent" r="100" cx="120" cy="120"/>
+                  <defs>
+                    <linearGradient id="terracottaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#E26D46" />
+                      <stop offset="100%" stop-color="#D8623A" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+
+                <div class="fasting-timer-content">
+                  <span class="fast-phase-label" id="fastPhaseTag"><i class="fa-solid fa-fire"></i> 深度自噬燃脂期</span>
+                  <h1 class="fast-elapsed-time" id="fastTimeDisplay">14:24:38</h1>
+                  <span class="fast-remain-text" id="fastRemainDisplay">距離結束還剩 1小時35分</span>
+                  <div class="fast-target-pill" id="fastTargetPill">目標 16 小時</div>
+                </div>
+              </div>
+
+              <!-- 斷食按鈕組 -->
+              <div class="fasting-ctrl-btns">
+                <button class="btn-primary-action btn-fast-toggle" id="btnToggleFasting">
+                  <i class="fa-solid fa-pause"></i> 結束今日斷食
+                </button>
+                <div class="fast-mini-actions">
+                  <button class="btn-fast-sub" id="btnLogFastWater"><i class="fa-solid fa-droplet"></i> 記錄斷食補水</button>
+                  <button class="btn-fast-sub" id="btnAdjustFastTime"><i class="fa-regular fa-clock"></i> 調整開始時間</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 斷食生理階段時間軸 -->
+            <div class="fasting-stages-card zen-card">
+              <h3 class="card-inner-title">身體正在發生的燃脂蛻變</h3>
+              
+              <div class="timeline-stepper">
+                <div class="timeline-step passed">
+                  <div class="step-indicator"><i class="fa-solid fa-check"></i></div>
+                  <div class="step-text">
+                    <h4>0 - 4 小時 · 血糖與胰島素平穩</h4>
+                    <p>最後一餐食物完全消化，胰島素分泌降回基礎水平</p>
+                  </div>
+                </div>
+                <div class="timeline-step passed">
+                  <div class="step-indicator"><i class="fa-solid fa-check"></i></div>
+                  <div class="step-text">
+                    <h4>4 - 12 小時 · 糖原消耗殆盡</h4>
+                    <p>肝臟儲存的糖原耗盡，身體轉向分解脂肪酸作為主要能源</p>
+                  </div>
+                </div>
+                <div class="timeline-step active">
+                  <div class="step-indicator pulse-terracotta"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                  <div class="step-text">
+                    <h4 class="text-terracotta">12 - 16 小時 · 深度燃脂與自噬 (當前)</h4>
+                    <p>細胞自噬啟動，清理老化細胞碎片，脂肪氧化分解達到峰值！</p>
+                  </div>
+                </div>
+                <div class="timeline-step">
+                  <div class="step-indicator"><i class="fa-solid fa-hourglass-half"></i></div>
+                  <div class="step-text">
+                    <h4>16 小時以上 · 深度生酮期</h4>
+                    <p>生酮水平顯著提升，精神專注度提高，抗發炎反應啟動</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 斷食歷史打卡熱力記錄 -->
+            <div class="fasting-history-card zen-card">
+              <div class="card-inner-header">
+                <h3>本週斷食達成紀錄</h3>
+                <span class="badge-accent">達標率 100%</span>
+              </div>
+              <div class="week-days-strip">
+                <div class="day-dot-item done"><span>一</span><i class="fa-solid fa-check"></i></div>
+                <div class="day-dot-item done"><span>二</span><i class="fa-solid fa-check"></i></div>
+                <div class="day-dot-item done"><span>三</span><i class="fa-solid fa-check"></i></div>
+                <div class="day-dot-item done"><span>四</span><i class="fa-solid fa-check"></i></div>
+                <div class="day-dot-item done"><span>五</span><i class="fa-solid fa-check"></i></div>
+                <div class="day-dot-item active-day"><span>六</span><i class="fa-solid fa-fire"></i></div>
+                <div class="day-dot-item pending"><span>日</span><i class="fa-regular fa-clock"></i></div>
+              </div>
+            </div>
+
+            <div class="viewport-bottom-spacer"></div>
+          </section>
+        </main>
+
+        <!-- 底部現代導航欄 (Active: 斷食) -->
+        <nav class="bottom-nav-bar" id="bottomNavBar">
+          <a href="index.html" class="nav-tab" data-target="page-dashboard">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-house"></i></div>
+            <span class="nav-text">今日</span>
+          </a>
+          <a href="diet.html" class="nav-tab" data-target="page-diet">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-utensils"></i></div>
+            <span class="nav-text">飲食</span>
+          </a>
+          <a href="fasting.html" class="nav-tab active" data-target="page-fasting">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-hourglass-half"></i></div>
+            <span class="nav-text">斷食</span>
+          </a>
+          <a href="workouts.html" class="nav-tab" data-target="page-workout">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-dumbbell"></i></div>
+            <span class="nav-text">運動</span>
+          </a>
+          <a href="trends.html" class="nav-tab" data-target="page-trends">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
+            <span class="nav-text">趨勢</span>
+          </a>
+          <a href="profile.html" class="nav-tab" data-target="page-profile">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-user"></i></div>
+            <span class="nav-text">我的</span>
+          </a>
+        </nav>
+
+        <div class="home-indicator"></div>
+
+      </div><!-- /.phone-frame -->
+    </div><!-- /.phone-wrapper -->
+  </div><!-- /.desktop-stage -->
+
+  <!-- 全局輕量 Toast 提示框 -->
+  <div class="toast-notification" id="globalToast">
+    <div class="toast-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <span class="toast-message" id="toastMessage">已成功記錄！</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

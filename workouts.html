@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>燃脂運動與 HIIT 訓練 | MindFit Zen 智能減脂</title>
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- PWA 核心設定與行動裝置安裝優化 -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#234E48">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MindFit Zen">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="zen-theme">
+
+  <div class="desktop-stage">
+    <div class="phone-wrapper iphone15" id="phoneWrapper">
+      <div class="phone-frame">
+
+        <!-- 手機頂部狀態欄 -->
+        <header class="phone-status-bar">
+          <span class="status-time" id="statusClock">09:41</span>
+          <div class="status-icons">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <i class="fa-solid fa-battery-full"></i>
+          </div>
+        </header>
+
+        <main class="app-viewport" id="appViewport">
+          <section class="app-page active-page" id="page-workout">
+            
+            <div class="page-top-bar">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <a href="index.html" class="icon-round-btn" title="返回總覽" style="text-decoration:none;">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </a>
+                <div class="page-heading">
+                  <h2>燃脂運動與訓練</h2>
+                  <span>高效提升代謝 · 打造易瘦體質</span>
+                </div>
+              </div>
+              <button class="pill-btn-outline" id="btnCustomWorkout">
+                <i class="fa-solid fa-bolt"></i> 開始挑戰
+              </button>
+            </div>
+
+            <!-- 今日運動消耗總結 -->
+            <div class="workout-stat-banner zen-card">
+              <div class="w-stat-item">
+                <span class="w-label">今日運動消耗</span>
+                <span class="w-num text-terracotta" id="workoutTotalBurn">340</span>
+                <span class="w-unit">千卡 (kcal)</span>
+              </div>
+              <div class="w-stat-divider"></div>
+              <div class="w-stat-item">
+                <span class="w-label">活躍運動時長</span>
+                <span class="w-num" id="workoutTotalMins">42</span>
+                <span class="w-unit">分鐘 (mins)</span>
+              </div>
+              <div class="w-stat-divider"></div>
+              <div class="w-stat-item">
+                <span class="w-label">週運動目標</span>
+                <span class="w-num text-teal">4/5</span>
+                <span class="w-unit">天已達標</span>
+              </div>
+            </div>
+
+            <!-- 運動分類篩選 -->
+            <div class="workout-filter-strip">
+              <button class="filter-pill active" data-wtype="all">全部訓練</button>
+              <button class="filter-pill" data-wtype="hiit">HIIT 爆汗</button>
+              <button class="filter-pill" data-wtype="cardio">有氧慢跑</button>
+              <button class="filter-pill" data-wtype="core">核心腹肌</button>
+              <button class="filter-pill" data-wtype="stretch">瑜伽拉伸</button>
+            </div>
+
+            <!-- 運動課程列表 -->
+            <div class="workout-cards-grid" id="workoutCardsList">
+              <!-- 運動項目 1 -->
+              <div class="workout-card zen-card" data-category="hiit" data-name="晨間全身爆汗 HIIT" data-mins="15" data-kcal="180">
+                <div class="w-card-thumb">
+                  <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400&auto=format&fit=crop&q=80" alt="HIIT">
+                  <span class="w-tag-difficulty"><i class="fa-solid fa-bolt"></i> 高效燃脂</span>
+                </div>
+                <div class="w-card-body">
+                  <div class="w-title-row">
+                    <h4>晨間全身爆汗 HIIT</h4>
+                    <span class="w-kcal-badge">180 kcal</span>
+                  </div>
+                  <p class="w-desc">開合跳 · 高抬腿 · 深蹲跳 · 波比跳輪替，持續燃燒一整天</p>
+                  <div class="w-card-footer">
+                    <span><i class="fa-regular fa-clock"></i> 15 分鐘 · 間歇模式</span>
+                    <button class="start-workout-btn" data-id="1"><i class="fa-solid fa-play"></i> 開始</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 運動項目 2 -->
+              <div class="workout-card zen-card" data-category="cardio" data-name="減脂有氧戶外慢跑" data-mins="30" data-kcal="280">
+                <div class="w-card-thumb">
+                  <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&auto=format&fit=crop&q=80" alt="慢跑">
+                  <span class="w-tag-difficulty tag-green"><i class="fa-solid fa-leaf"></i> 溫和有氧</span>
+                </div>
+                <div class="w-card-body">
+                  <div class="w-title-row">
+                    <h4>減脂有氧戶外慢跑</h4>
+                    <span class="w-kcal-badge">280 kcal</span>
+                  </div>
+                  <p class="w-desc">配速 6'30"，維持在燃脂最佳心率區間，保護膝關節</p>
+                  <div class="w-card-footer">
+                    <span><i class="fa-regular fa-clock"></i> 30 分鐘 · 勻速</span>
+                    <button class="start-workout-btn" data-id="2"><i class="fa-solid fa-play"></i> 開始</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 運動項目 3 -->
+              <div class="workout-card zen-card" data-category="core" data-name="睡前馬甲線核心雕刻" data-mins="20" data-kcal="120">
+                <div class="w-card-thumb">
+                  <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&auto=format&fit=crop&q=80" alt="核心瑜伽">
+                  <span class="w-tag-difficulty tag-purple"><i class="fa-solid fa-gem"></i> 塑形緊緻</span>
+                </div>
+                <div class="w-card-body">
+                  <div class="w-title-row">
+                    <h4>睡前馬甲線核心雕刻</h4>
+                    <span class="w-kcal-badge">120 kcal</span>
+                  </div>
+                  <p class="w-desc">平板支撐 · 俄羅斯轉體 · 死蟲式，緊緻小腹改善體態</p>
+                  <div class="w-card-footer">
+                    <span><i class="fa-regular fa-clock"></i> 20 分鐘 · 無器械</span>
+                    <button class="start-workout-btn" data-id="3"><i class="fa-solid fa-play"></i> 開始</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 運動項目 4 -->
+              <div class="workout-card zen-card" data-category="hiit" data-name="Tabata 極限 4 分鐘燃脂" data-mins="8" data-kcal="110">
+                <div class="w-card-thumb">
+                  <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&auto=format&fit=crop&q=80" alt="Tabata">
+                  <span class="w-tag-difficulty"><i class="fa-solid fa-fire"></i> 超高強度</span>
+                </div>
+                <div class="w-card-body">
+                  <div class="w-title-row">
+                    <h4>Tabata 極限 4 分鐘燃脂</h4>
+                    <span class="w-kcal-badge">110 kcal</span>
+                  </div>
+                  <p class="w-desc">20秒全力爆發 + 10秒喘息休整，啟動 EPOC 運動後過量氧耗</p>
+                  <div class="w-card-footer">
+                    <span><i class="fa-regular fa-clock"></i> 8 分鐘 (2組)</span>
+                    <button class="start-workout-btn" data-id="4"><i class="fa-solid fa-play"></i> 開始</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="viewport-bottom-spacer"></div>
+          </section>
+        </main>
+
+        <!-- 底部現代導航欄 (Active: 運動) -->
+        <nav class="bottom-nav-bar" id="bottomNavBar">
+          <a href="index.html" class="nav-tab" data-target="page-dashboard">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-house"></i></div>
+            <span class="nav-text">今日</span>
+          </a>
+          <a href="diet.html" class="nav-tab" data-target="page-diet">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-utensils"></i></div>
+            <span class="nav-text">飲食</span>
+          </a>
+          <a href="fasting.html" class="nav-tab" data-target="page-fasting">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-hourglass-half"></i></div>
+            <span class="nav-text">斷食</span>
+          </a>
+          <a href="workouts.html" class="nav-tab active" data-target="page-workout">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-dumbbell"></i></div>
+            <span class="nav-text">運動</span>
+          </a>
+          <a href="trends.html" class="nav-tab" data-target="page-trends">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
+            <span class="nav-text">趨勢</span>
+          </a>
+          <a href="profile.html" class="nav-tab" data-target="page-profile">
+            <div class="nav-icon-wrap"><i class="fa-solid fa-user"></i></div>
+            <span class="nav-text">我的</span>
+          </a>
+        </nav>
+
+        <div class="home-indicator"></div>
+
+      </div><!-- /.phone-frame -->
+    </div><!-- /.phone-wrapper -->
+  </div><!-- /.desktop-stage -->
+
+  <!-- HIIT 沉浸式訓練全屏計時器 (Workout Player Modal) -->
+  <div class="modal-overlay fullscreen-modal" id="workoutPlayerModal">
+    <div class="player-screen">
+      <div class="player-top">
+        <button class="player-close-btn" id="btnCloseWorkoutPlayer"><i class="fa-solid fa-xmark"></i></button>
+        <span class="player-exercise-badge" id="playerBadge">HIIT 間歇燃脂中</span>
+        <button class="player-sound-btn" id="btnToggleWorkoutMute"><i class="fa-solid fa-volume-high"></i></button>
+      </div>
+
+      <div class="player-visual-center">
+        <div class="player-circle-wrap">
+          <svg width="260" height="260" viewBox="0 0 260 260">
+            <circle stroke="rgba(255,255,255,0.15)" stroke-width="14" fill="transparent" r="110" cx="130" cy="130"/>
+            <circle id="playerTimerRing" stroke="#E26D46" stroke-width="14" stroke-linecap="round" fill="transparent" r="110" cx="130" cy="130"/>
+          </svg>
+          <div class="player-center-txt">
+            <span class="p-status" id="playerPhaseName">動作進行中</span>
+            <h1 class="p-time-big" id="playerSecondsDisplay">00:45</h1>
+            <span class="p-set-info" id="playerSetsDisplay">第 1 / 6 節</span>
+          </div>
+        </div>
+        <h2 class="player-current-move" id="playerActionName">🔥 開合跳 (Jumping Jacks)</h2>
+        <p class="player-next-move" id="playerNextMove">下一個動作：深蹲跳 (休息 15秒)</p>
+      </div>
+
+      <!-- 即時燃脂與心率模擬 -->
+      <div class="player-stats-dock">
+        <div class="dock-item">
+          <span class="d-val text-terracotta" id="liveBurnVal">28</span>
+          <span class="d-lbl">已燃熱量 (kcal)</span>
+        </div>
+        <div class="dock-item">
+          <span class="d-val" id="liveHeartRate">138</span>
+          <span class="d-lbl">燃脂心率 (bpm)</span>
+        </div>
+        <div class="dock-item">
+          <span class="d-val" id="liveTotalMins">02:15</span>
+          <span class="d-lbl">總訓練時長</span>
+        </div>
+      </div>
+
+      <div class="player-controls-bottom">
+        <button class="player-ctrl-btn p-btn-sub" id="btnFinishWorkoutEarly">提前完成</button>
+        <button class="player-ctrl-btn p-btn-play" id="btnPlayerPlayPause"><i class="fa-solid fa-pause"></i></button>
+        <button class="player-ctrl-btn p-btn-sub" id="btnSkipWorkoutMove">跳過動作</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全局輕量 Toast 提示框 -->
+  <div class="toast-notification" id="globalToast">
+    <div class="toast-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <span class="toast-message" id="toastMessage">已成功記錄！</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
